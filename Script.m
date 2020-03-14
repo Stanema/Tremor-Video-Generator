@@ -66,7 +66,7 @@ clc, clear all;
 
 M=200; N=200; %matrix dimensions
 a=50; %square dimension
-x= 5; %dispersion
+x= 1; %dispersion
 
 A = zeros(M, N, 3);
 A1=A;
@@ -138,4 +138,9 @@ end
 close(video);
 
 %% Play video
-implay('video.avi');
+Frames=zeros(M,N);
+
+for i=1:length(Array)
+  Frames(:,:,i) = im2bw(Array{i});
+end
+implay(Frames);
