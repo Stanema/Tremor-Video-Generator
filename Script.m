@@ -60,7 +60,74 @@ for j = 100:400 %width
 end
 Array=Array(~cellfun('isempty',Array));
 %imshow(A);
-%% Video
+
+%%  Bigger/Smaller
+clc, clear all;
+
+M=200; N=200; %matrix dimensions
+a=50; %square dimension
+x= 5; %dispersion
+
+A = zeros(M, N, 3);
+A1=A;
+n = 0 ;
+Array = cell(n, 1);
+
+A((M/2-a/2):(M/2+a/2),(M/2-a/2):(M/2+a/2), :) = 1;
+A1((M/2-a/2)-x:(M/2+a/2)+x,(M/2-a/2)-x:(M/2+a/2)+x, :) = 1;
+
+for i = 1:2:201
+    Array{i} = A;
+    Array{i+1} = A1;
+end
+
+%% Verical tremor
+clc, clear all;
+
+M=200; N=200; %matrix dimensions
+a=50; %square dimension
+x= 5; %dispersion
+
+A = zeros(M, N, 3);
+A1=A;
+n = 0 ;
+Array = cell(n, 1);
+
+A((M/2-a/2):(M/2+a/2),(M/2-a/2):(M/2+a/2), :) = 1;
+A1((M/2-a/2):(M/2+a/2),(M/2-a/2)+x:(M/2+a/2)+x, :) = 1;
+
+for i = 1:2:201
+    Array{i} = A;
+    Array{i+1} = A1;
+end
+
+%% Tremor
+clc, clear all;
+
+M=200; N=200; %matrix dimensions
+a=50; %square dimension
+x= 5; %dispersion
+
+A1 = zeros(M, N, 3);
+A2=A1;
+A3=A1;
+A4=A1;
+n = 0 ;
+Array = cell(n, 1);
+
+A1((M/2-a/2)-x:(M/2+a/2)-x,(M/2-a/2)-x:(M/2+a/2)-x, :) = 1;
+A2((M/2-a/2)-x:(M/2+a/2)-x,(M/2-a/2)+x:(M/2+a/2)+x, :) = 1;
+A3((M/2-a/2)+x:(M/2+a/2)+x,(M/2-a/2)+x:(M/2+a/2)+x, :) = 1;
+A4((M/2-a/2)+x:(M/2+a/2)+x,(M/2-a/2)-x:(M/2+a/2)-x, :) = 1;
+
+for i = 1:4:401
+    Array{i} = A1;
+    Array{i+1} = A2;
+    Array{i+2} = A3;
+    Array{i+3} = A4;
+end
+
+%% Video creation
 
 video = VideoWriter('video.avi');
 open(video);
@@ -70,5 +137,5 @@ for i=1:length(Array)
 end
 close(video);
 
-
- 
+%% Play video
+implay('video.avi');
