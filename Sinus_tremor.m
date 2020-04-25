@@ -1,35 +1,34 @@
 %% sinus tremor
 clc, clear all;
 
-M=200; N=200; %matrix dimensions
+% Video definition
+M=1500; N=1500; %matrix dimensions
 m = M/2; n = N/2; %center of square
 a=50; %square dimension
-x= 5; %dispersion of tremor
-tf = 240; %total of frames
-fps = 5; %fps
+fps = 60; %fps
+name='Video.avi';
 
+%% sinus definition
+t = 0:0.1:8*pi;
+y = sin(t);
+y = y*100;
+y = round(y);
 
-Array = cell(0, 1);
-A1 = zeros(M, N, 3);
-A2=A1;
-A3=A1;
-A4=A1;
+%% Y axis tremor
+for i = 1:length(y)
+    Array{i} = zeros(M, N, 3);
+    Array{i}((m-a/2)-y(i):(m+a/2)-y(i),(n-a/2):(n+a/2), :) = 1;
+end
 
-A1((m-a/2)-x:(m+a/2)-x,(n-a/2)-x:(n+a/2)-x, :) = 1;
-A2((m-a/2)-x:(m+a/2)-x,(n-a/2)+x:(n+a/2)+x, :) = 1;
-A3((m-a/2)+x:(m+a/2)+x,(n-a/2)+x:(n+a/2)+x, :) = 1;
-A4((m-a/2)+x:(m+a/2)+x,(n-a/2)-x:(n+a/2)-x, :) = 1;
-
-for i = 1:4:(tf+1)
-    Array{i} = A1;
-    Array{i+1} = A2;
-    Array{i+2} = A3;   
-    Array{i+3} = A4;
+%% X axis tremor
+for i = 1:length(y)
+    Array{i} = zeros(M, N, 3);
+    Array{i}((m-a/2):(m+a/2),(n-a/2)-y(i):(n+a/2)-y(i), :) = 1;
 end
 
 %% Video creation
 
-video = VideoWriter('video.avi');
+video = VideoWriter(name);
 video.FrameRate = fps;
 open(video);
 for i=1:length(Array)
@@ -37,6 +36,7 @@ for i=1:length(Array)
   writeVideo(video,Frame); %write the image to file
 end
 close(video);
+
 
 %% Play video
 Frames=zeros(M,N);
