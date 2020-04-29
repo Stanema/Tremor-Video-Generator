@@ -6,12 +6,15 @@ M=1500; N=1500; %matrix dimensions
 m = M/2; n = N/2; %center of square
 a=50; %square dimension
 fps = 60; %fps
+d = 2; %duration of video (in seconds)
+f = 0.5; % display frequency (0.1 = 1Hz; 0.5 = 5Hz; 1= 10Hz)
+r = 100; %rounding rate (recomanded value = 100)
 name='Video.avi';
 
 %% sinus definition
-t = 0:0.1:8*pi;
+t = 0:f:fps*f*d; %(0.1 1 perioda 63 framù)
 y = sin(t);
-y = y*100;
+y = y*r;
 y = round(y);
 
 %% Y axis tremor
