@@ -7,7 +7,7 @@ m = M/2; n = N/2; %center of square
 a=50; %square dimension
 fps = 60; %fps
 d = 2; %duration of video (in seconds)
-f = 0.5; % display frequency (0.1 = 1Hz; 0.5 = 5Hz; 1= 10Hz)
+f = 0.5; % display frequency (for 60 fps - 0.1 = 1Hz; 0.5 = 5Hz; 1= 10Hz)
 r = 100; %rounding rate (recomanded value = 100)
 name='Video.avi';
 
