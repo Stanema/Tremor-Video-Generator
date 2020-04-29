@@ -12,7 +12,7 @@ r = 100; %rounding rate (recomanded value = 100)
 name='Video.avi';
 
 %% sinus definition
-t = 0:f:fps*f*d; %(0.1 1 perioda 63 framù)
+t = 0:f:fps*f*d; 
 y = sin(t);
 y = y*r;
 y = round(y);
