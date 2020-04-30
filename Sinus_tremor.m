@@ -12,7 +12,7 @@ r = M/4; %amplitude (recomanded value = axis/4)
 name="Video_"+fps+"fps_"+f+"Hz_";
 
 %% sinus definition
-ff= f/(fps/6.3);
+ff= f/(fps/(2*pi));
 t = 0:ff:fps*ff*d;
 y = sin(t);
 y = y*r;
